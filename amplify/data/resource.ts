@@ -8,13 +8,13 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  getTrendsFunction: a
-    .query()
-    .arguments({
-      name: a.string(),
-    })
-    .returns(a.string())
-    .handler(a.handler.function(getTrendsFunction)),
+  // getTrendsFunction: a
+  //   .query()
+  //   .arguments({
+  //     name: a.string(),
+  //   })
+  //   .returns(a.string())
+  //   .handler(a.handler.function(getTrendsFunction)),
 
   Todo: a
     .model({
