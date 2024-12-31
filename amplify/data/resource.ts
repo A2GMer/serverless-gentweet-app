@@ -17,9 +17,18 @@ const schema = a.schema({
       .model({
         id: a.id().required(),
         word: a.string().required(),
-        createdAt: a.date()
+        createdAt: a.date(),
       })
       .authorization((allow) => [allow.publicApiKey()]),
+
+    Quote: a
+      .model({
+        id: a.id().required(),
+        trendId: a.belongsTo('Trend', 'id'),
+        content: a.string(),
+        createAt: a.date(),
+      })
+      .authorization((allow) => [allow.publicApiKey()])
 });
 
 export type Schema = ClientSchema<typeof schema>;
