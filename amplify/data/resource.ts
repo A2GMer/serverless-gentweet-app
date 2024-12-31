@@ -1,4 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { getTrendsFunction } from "../getTrends-function/resource"
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -7,28 +8,36 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
+  getTrendsFunction: a
+    .query()
+    .arguments({
+      name: a.string(),
+    })
+    .returns(a.string())
+    .handler(a.handler.function(getTrendsFunction)),
+
   Todo: a
     .model({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 
-    Trend: a
-      .model({
-        id: a.id().required(),
-        word: a.string().required(),
-        createdAt: a.date(),
-      })
-      .authorization((allow) => [allow.publicApiKey()]),
+  Trend: a
+    .model({
+      id: a.id().required(),
+      word: a.string().required(),
+      createdAt: a.date(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
-    Quote: a
-      .model({
-        id: a.id().required(),
-        trendId: a.belongsTo('Trend', 'id'),
-        content: a.string(),
-        createAt: a.date(),
-      })
-      .authorization((allow) => [allow.publicApiKey()])
+  // Quote: a
+  //   .model({
+  //     id: a.id().required(),
+  //     trendId: a.belongsTo('Trend', 'id'),
+  //     content: a.string(),
+  //     createAt: a.date(),
+  //   })
+  //   .authorization((allow) => [allow.publicApiKey()])
 });
 
 export type Schema = ClientSchema<typeof schema>;
