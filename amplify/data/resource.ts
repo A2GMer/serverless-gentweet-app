@@ -16,28 +16,29 @@ const schema = a.schema({
   //   .returns(a.string())
   //   .handler(a.handler.function(getTrendsFunction)),
 
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
+  // Todo: a
+  //   .model({
+  //     content: a.string(),
+  //   })
+  //   .authorization((allow) => [allow.publicApiKey()]),
 
   Trend: a
     .model({
       id: a.id().required(),
       word: a.string().required(),
       createdAt: a.date(),
+      quotes: a.hasMany('Quote', 'id'),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 
-  // Quote: a
-  //   .model({
-  //     id: a.id().required(),
-  //     trendId: a.belongsTo('Trend', 'id'),
-  //     content: a.string(),
-  //     createAt: a.date(),
-  //   })
-  //   .authorization((allow) => [allow.publicApiKey()])
+  Quote: a
+    .model({
+      id: a.id().required(),
+      trendId: a.belongsTo('Trend', 'id'),
+      content: a.string(),
+      createAt: a.date(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
