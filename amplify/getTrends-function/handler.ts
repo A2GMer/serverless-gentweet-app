@@ -1,3 +1,6 @@
-export const handler = async (event) => {
-    return "Hello from my first function!";
-  };
+import type { Handler } from 'aws-lambda';
+
+export const handler: Handler = async (event, context) => {
+  // your function code goes here
+  return 'Hello, World!';
+};
