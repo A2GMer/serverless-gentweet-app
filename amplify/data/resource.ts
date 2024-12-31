@@ -12,6 +12,14 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+
+    Trend: a
+      .model({
+        id: a.id().required(),
+        word: a.string().required(),
+        createdAt: a.date()
+      })
+      .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -23,7 +31,6 @@ export const data = defineData({
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
-    },
   },
 });
 
