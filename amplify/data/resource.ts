@@ -16,11 +16,11 @@ const schema = a.schema({
   //   .returns(a.string())
   //   .handler(a.handler.function(getTrendsFunction)),
 
-  // Todo: a
-  //   .model({
-  //     content: a.string(),
-  //   })
-  //   .authorization((allow) => [allow.publicApiKey()]),
+  Todo: a
+    .model({
+      content: a.string(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
   Trend: a
     .model({
